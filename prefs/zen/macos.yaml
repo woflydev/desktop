@@ -11,6 +11,15 @@
   mirror: always
   type: static
 
+# Testing only: never report windows as occluded, so a covered window keeps
+# rendering. Used by scripts/bench to measure Zen while the machine is in use.
+- name: zen.testing.ignore-window-occlusion
+  value: false
+  condition: "defined(XP_MACOSX)"
+  cpptype: bool
+  mirror: always
+  type: static
+
 # 1. hudWindow
 # 2. fullScreenUI
 # 3. popover

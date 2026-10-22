@@ -1158,6 +1158,26 @@ Preferences.addAll([
     default: true,
   },
   {
+    id: "zen.efficiency-mode.enabled",
+    type: "bool",
+    default: false,
+  },
+  {
+    id: "zen.efficiency-mode.tab-sleep.enabled",
+    type: "bool",
+    default: true,
+  },
+  {
+    id: "zen.efficiency-mode.tab-sleep.include-pinned",
+    type: "bool",
+    default: false,
+  },
+  {
+    id: "zen.efficiency-mode.pause-inactive-animations",
+    type: "bool",
+    default: true,
+  },
+  {
     id: "zen.tab-unloader.timeout-minutes",
     type: "int",
     default: 10,

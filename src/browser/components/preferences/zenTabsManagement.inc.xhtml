@@ -77,6 +77,31 @@
       </hbox>
 </groupbox>
 
+<hbox id="zenEfficiencyModeCategory"
+      class="subcategory"
+      hidden="true"
+      data-category="paneZenTabManagement">
+      <html:h1 data-l10n-id="pane-zen-efficiency-mode-title"/>
+</hbox>
+
+<groupbox id="zenEfficiencyModeGroup" data-category="paneZenTabManagement" hidden="true" class="highlighting-group">
+      <label><html:h2 data-l10n-id="zen-efficiency-mode-header"/></label>
+      <description class="description-deemphasized" data-l10n-id="zen-efficiency-mode-description" />
+
+      <checkbox id="zenEfficiencyModeEnabled"
+                data-l10n-id="zen-efficiency-mode-enabled"
+                preference="zen.efficiency-mode.enabled"/>
+      <checkbox id="zenEfficiencyModeTabSleep"
+                data-l10n-id="zen-efficiency-mode-tab-sleep"
+                preference="zen.efficiency-mode.tab-sleep.enabled"/>
+      <checkbox id="zenEfficiencyModeTabSleepPinned"
+                data-l10n-id="zen-efficiency-mode-tab-sleep-include-pinned"
+                preference="zen.efficiency-mode.tab-sleep.include-pinned"/>
+      <checkbox id="zenEfficiencyModePauseAnimations"
+                data-l10n-id="zen-efficiency-mode-pause-inactive-animations"
+                preference="zen.efficiency-mode.pause-inactive-animations"/>
+</groupbox>
+
 </html:template>
 
 

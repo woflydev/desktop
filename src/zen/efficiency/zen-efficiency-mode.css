@@ -1,0 +1,13 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* Decorative loops keep the compositor producing frames for as long as they
+ * run. Pause them while Zen is not the active app; they resume on focus. */
+:root[zen-efficiency-pause-animations]:-moz-window-inactive {
+  & .zen-media-notes::before,
+  & .zen-site-data-boost-strip,
+  & .zen-sidebar-notification-link-text[special] {
+    animation-play-state: paused !important;
+  }
+}

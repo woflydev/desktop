@@ -1,0 +1,16 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>bench audio</title>
+<!-- A tone quiet enough not to be heard (about -66 dB) but loud enough for
+     the browser to treat the tab as playing sound. -->
+<script src="bench.js"></script>
+<script>
+  const ctx = new AudioContext();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  gain.gain.value = 0.0005;
+  osc.frequency.value = 440;
+  osc.connect(gain).connect(ctx.destination);
+  osc.start();
+  setInterval(() => report("audio", { state: ctx.state }), 60000);
+</script>

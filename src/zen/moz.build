@@ -11,6 +11,7 @@ DIRS += [
     "common",
     "compact-mode",
     "drag-and-drop",
+    "efficiency",
     "glance",
     "library",
     "live-folders",

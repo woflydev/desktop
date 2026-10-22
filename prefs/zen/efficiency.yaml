@@ -1,0 +1,24 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+# Efficiency mode: cut work the user cannot see. See ZenEfficiencyMode.sys.mjs.
+- name: zen.efficiency-mode.enabled
+  value: false
+
+# Unload background tabs that have not been used for a while.
+- name: zen.efficiency-mode.tab-sleep.enabled
+  value: true
+
+- name: zen.efficiency-mode.tab-sleep.timeout-minutes
+  value: 60
+
+- name: zen.efficiency-mode.tab-sleep.check-interval-seconds
+  value: 300
+
+- name: zen.efficiency-mode.tab-sleep.include-pinned
+  value: false
+
+# Pause decorative chrome animations while Zen is not the active app.
+- name: zen.efficiency-mode.pause-inactive-animations
+  value: true

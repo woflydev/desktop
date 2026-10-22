@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>bench busy</title>
+<!-- Stands in for a typical background web app: a polling timer doing a
+     little DOM and JSON work, and a periodic network request. -->
+<body>
+<ul id="feed"></ul>
+<script src="bench.js"></script>
+<script>
+  const feed = document.getElementById("feed");
+  let n = 0;
+  setInterval(() => {
+    const items = Array.from({ length: 200 }, (_, i) => ({ id: n * 200 + i, v: Math.random() }));
+    const parsed = JSON.parse(JSON.stringify(items));
+    const li = document.createElement("li");
+    li.textContent = `${n++} ${parsed.reduce((a, b) => a + b.v, 0).toFixed(3)}`;
+    feed.prepend(li);
+    if (feed.childElementCount > 50) feed.lastElementChild.remove();
+  }, 1000);
+  setInterval(() => fetch("bench.js?poll=" + Date.now()).catch(() => {}), 15000);
+  setInterval(() => report("busy", { n }), 60000);
+</script>

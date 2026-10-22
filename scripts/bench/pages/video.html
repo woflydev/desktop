@@ -1,0 +1,32 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>bench video</title>
+<style>
+  html, body { margin: 0; background: #000; height: 100%; }
+  video { display: block; width: 1280px; height: 720px; margin: 40px auto 0; background: #000; }
+  #status { color: #888; font: 12px -apple-system, sans-serif; text-align: center; margin-top: 8px; }
+</style>
+<video id="v" muted autoplay loop playsinline></video>
+<div id="status"></div>
+<script src="bench.js"></script>
+<script>
+  const v = document.getElementById("v");
+  const codec = params.get("codec") || "h264";
+  const src = { h264: "media/bbb-h264.mp4", vp9: "media/bbb-vp9.webm", av1: "media/bbb-av1.webm" }[codec];
+  v.src = src;
+  v.play().catch(e => report("error", { error: String(e) }));
+  let last = null;
+  function sample() {
+    const q = v.getVideoPlaybackQuality ? v.getVideoPlaybackQuality() : {};
+    const cur = { total: q.totalVideoFrames || 0, dropped: q.droppedVideoFrames || 0, time: v.currentTime };
+    if (last) {
+      const total = cur.total - last.total, dropped = cur.dropped - last.dropped;
+      report("video", { codec, total, dropped, playing: !v.paused, w: v.videoWidth, h: v.videoHeight });
+      document.getElementById("status").textContent = `${codec} ${v.videoWidth}x${v.videoHeight} frames ${total} dropped ${dropped}`;
+    }
+    last = cur;
+  }
+  v.addEventListener("error", () => report("error", { error: "media error " + (v.error && v.error.code) }));
+  setInterval(sample, 30000);
+  setTimeout(sample, 1000);
+</script>

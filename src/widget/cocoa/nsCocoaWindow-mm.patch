@@ -11,7 +11,7 @@ index fe4c27544a29b8bbf0b99331c9e1bce3038b8e81..84bd5953c6fc71bcd39ec8922ac84df1
  #include "mozilla/WritingModes.h"
  #include "mozilla/dom/Document.h"
  #include "mozilla/layers/CompositorBridgeChild.h"
-@@ -1333,6 +1335,110 @@ - (NSRect)_opaqueRectForWindowMoveWhenInTitlebar {
+@@ -1333,6 +1335,110 @@ mozilla::VibrancyManager& nsCocoaWindow::EnsureVibrancyManager() {
  }
  @end
  
@@ -122,7 +122,7 @@ index fe4c27544a29b8bbf0b99331c9e1bce3038b8e81..84bd5953c6fc71bcd39ec8922ac84df1
  void nsCocoaWindow::UpdateWindowDraggingRegion(
      const LayoutDeviceIntRegion& aRegion) {
    // mChildView returns YES from mouseDownCanMoveWindow, so we need to put
-@@ -3908,7 +4014,9 @@ - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender {
+@@ -3909,7 +4015,9 @@ static gfx::IntPoint GetIntegerDeltaForEvent(NSEvent* aEvent) {
  // NSDraggingDestination
  - (NSDragOperation)draggingUpdated:(id<NSDraggingInfo>)sender {
    MOZ_LOG(sCocoaLog, LogLevel::Info, ("ChildView draggingUpdated: entered\n"));
@@ -133,7 +133,7 @@ index fe4c27544a29b8bbf0b99331c9e1bce3038b8e81..84bd5953c6fc71bcd39ec8922ac84df1
  }
  
  // NSDraggingDestination
-@@ -3924,6 +4032,9 @@ - (void)draggingExited:(id<NSDraggingInfo>)sender {
+@@ -3925,6 +4033,9 @@ static gfx::IntPoint GetIntegerDeltaForEvent(NSEvent* aEvent) {
  - (BOOL)performDragOperation:(id<NSDraggingInfo>)sender {
    nsAutoRetainCocoaObject kungFuDeathGrip(self);
    BOOL handled = [self doDragAction:eDrop sender:sender] != NSDragOperationNone;
@@ -143,7 +143,7 @@ index fe4c27544a29b8bbf0b99331c9e1bce3038b8e81..84bd5953c6fc71bcd39ec8922ac84df1
    NS_IF_RELEASE(mDragService);
    return handled;
  }
-@@ -4978,6 +5089,10 @@ - (BOOL)wantsBestResolutionOpenGLSurface {
+@@ -4979,6 +5090,10 @@ void nsCocoaWindow::DestroyNativeWindow() {
  nsCocoaWindow::~nsCocoaWindow() {
    NS_OBJC_BEGIN_TRY_IGNORE_BLOCK;
  
@@ -154,3 +154,11 @@ index fe4c27544a29b8bbf0b99331c9e1bce3038b8e81..84bd5953c6fc71bcd39ec8922ac84df1
    RemoveAllChildren();
    if (mWindow && mWindowMadeHere) {
      CancelAllTransitions();
+@@ -7178,6 +7293,7 @@ void nsCocoaWindow::DispatchOcclusionEvent() {
+ 
+   // Our new occlusion state is true if the window is not visible.
+   bool newOcclusionState =
++      !StaticPrefs::zen_testing_ignore_window_occlusion() &&
+       !keyOrMainNonFullscreen &&
+       !(mHasStartedNativeFullscreen ||
+         ([mWindow occlusionState] & NSWindowOcclusionStateVisible));

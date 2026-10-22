@@ -87,6 +87,18 @@ zen-look-and-feel-compact-toolbar-themed =
 zen-workspace-continue-where-left-off =
     .label = Continue where you left off
 
+pane-zen-efficiency-mode-title = Efficiency Mode
+zen-efficiency-mode-header = Save battery without changing how Zen looks
+zen-efficiency-mode-description = Cuts work you can't see, like background tabs you haven't used in a while and decorative animations while Zen isn't the active app
+zen-efficiency-mode-enabled =
+    .label = Enable efficiency mode
+zen-efficiency-mode-tab-sleep =
+    .label = Unload tabs you haven't used for an hour (they reload when you return)
+zen-efficiency-mode-tab-sleep-include-pinned =
+    .label = Also unload pinned tabs and essentials
+zen-efficiency-mode-pause-inactive-animations =
+    .label = Pause decorative animations while Zen isn't the active app
+
 pane-zen-pinned-tab-manager-title = Pinned Tabs
 zen-pinned-tab-manager-header = General settings for pinned tabs
 zen-pinned-tab-manager-description = Manage additional behavior of pinned tabs
