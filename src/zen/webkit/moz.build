@@ -1,0 +1,37 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+XPIDL_SOURCES += [
+    "nsIZenWebKitView.idl",
+]
+
+EXPORTS.mozilla += [
+    "nsZenWebKitView.h",
+]
+
+SOURCES += [
+    "nsZenWebKitView.mm",
+    "ZenWebKitBridge.mm",
+]
+
+LOCAL_INCLUDES += [
+    "/zen/webkit",
+]
+
+OS_LIBS += ["-framework WebKit"]
+
+XPCOM_MANIFESTS += [
+    "components.conf",
+]
+
+include("/ipc/chromium/chromium-config.mozbuild")
+
+LOCAL_INCLUDES += [
+    "/dom/base",
+    "/widget",
+    "/widget/cocoa",
+]
+
+FINAL_LIBRARY = "xul"
+XPIDL_MODULE = "zen_webkit"

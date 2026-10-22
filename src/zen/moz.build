@@ -27,3 +27,8 @@ DIRS += [
     "tabs",
     "window-drag",
 ]
+
+if CONFIG["MOZ_WIDGET_TOOLKIT"] == "cocoa":
+    DIRS += [
+        "webkit",
+    ]

@@ -1,0 +1,42 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+#include "nsISupports.idl"
+
+interface mozIDOMWindowProxy;
+
+/**
+ * @brief EXPERIMENTAL prototype: host a native WKWebView on top of a
+ * browser window, so selected sites can render with WebKit.
+ */
+[scriptable, uuid(4e3b858d-a2a1-4696-b305-f73b5047baa5)]
+interface nsIZenWebKitView : nsISupports {
+  /** Create a WebKit view for `id` in `window` and load `url`. */
+  void create(in mozIDOMWindowProxy window, in AString id, in AString url);
+
+  /** Position the view, in window-relative CSS pixels (top-left origin). */
+  void setFrame(in AString id, in double x, in double y, in double width,
+                in double height, in double cornerRadius);
+
+  void setVisible(in AString id, in boolean visible);
+
+  /**
+   * While true, clicks over a visible WebKit view reach it; set false when
+   * Gecko UI (urlbar, glance, ...) is drawn over the page and needs them.
+   */
+  void setPassThrough(in boolean passThrough);
+
+  /**
+   * Which side owns the keyboard: true for the WebKit page, false for Gecko
+   * UI such as the urlbar.
+   */
+  void setPageFocused(in boolean focused);
+
+  /** Mute/unmute is not exposed by WKWebView; this just stops loading. */
+  void destroy(in AString id);
+
+  /** Current URL and title of the view, for syncing the tab UI. */
+  AString getUrl(in AString id);
+  AString getTitle(in AString id);
+};

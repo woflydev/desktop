@@ -62,4 +62,5 @@
   );
 
   Services.scriptloader.loadSubScript("chrome://browser/content/zen-components/ZenDragAndDrop.js", this);
+  Services.scriptloader.loadSubScript("chrome://browser/content/zen-components/ZenWebKitPrototype.js", this);
 }
